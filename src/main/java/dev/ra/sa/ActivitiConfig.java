@@ -15,23 +15,10 @@ import java.sql.Driver;
 @Configuration
 public class ActivitiConfig {
 
-    @Bean
-    public SimpleDriverDataSource createDataSource(){
-        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-dataSource.setDriverClass(com.microsoft.sqlserver.jdbc.SQLServerDriver.class);
-dataSource.setUrl("jdbc:sqlserver://MCCDEVDB;instanceName=DMGBSQL01;databaseName=MCCAPP");
-dataSource.setUsername("app-console-mccapp");
-dataSource.setPassword("LondonTown$2013");
-return dataSource;
-    }
+
 
     @Bean
-    public DataSourceTransactionManager createDataSourceTransactionManager(SimpleDriverDataSource dataSource){
-return new DataSourceTransactionManager(dataSource);
-    }
-
-    @Bean
-    public SpringProcessEngineConfiguration createProcessEngineConfiguration(SimpleDriverDataSource dataSource, DataSourceTransactionManager dataSourceTransactionManager){
+    public SpringProcessEngineConfiguration createProcessEngineConfiguration(DataSource dataSource, DataSourceTransactionManager dataSourceTransactionManager){
         SpringProcessEngineConfiguration springProcessEngineConfiguration = new SpringProcessEngineConfiguration();
         springProcessEngineConfiguration.setDataSource(dataSource);
         springProcessEngineConfiguration.setTransactionManager(dataSourceTransactionManager);
